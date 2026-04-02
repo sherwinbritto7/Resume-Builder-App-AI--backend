@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+import dns from "dns";
+dns.setServers(["1.1.1.1", "1.0.0.1"]);
+
 const connectDB = async () => {
   try {
     mongoose.connection.on("connected", () => {
@@ -14,7 +17,7 @@ const connectDB = async () => {
     if (mongodbURI.endsWith("/")) {
       mongodbURI = mongodbURI.slice(0, -1);
     }
-    await mongoose.connect(`${mongodbURI} / ${projectName}`);
+    await mongoose.connect(`${mongodbURI}/${projectName}`);
   } catch (error) {
     console.error("Error connecting to MongoDB: ", error);
   }
